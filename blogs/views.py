@@ -11,12 +11,12 @@ class BlogListView(ListView):
 
 class BlogDetailView(DetailView):
     model = Post
-    template_name = 'post_detail.html'
+    template_name = 'blogs/post_detail.html'
 
 class BlogCreateView(CreateView):
     model = Post
     fields = '__all__'
-    template_name = 'post_new.html'
+    template_name = 'blogs/post_new.html'
 
 class BlogUpdateView(UpdateView):
     model = Post
@@ -24,9 +24,9 @@ class BlogUpdateView(UpdateView):
         'title',
         'text'
     ]
-    template_name = 'post_edit.html'
+    template_name = 'blogs/post_edit.html'
 
 class BlogDeleteView(DeleteView):
     model = Post
-    template_name = 'post_delete.html'
+    template_name = 'blogs/post_delete.html'
     success_url = reverse_lazy('home')

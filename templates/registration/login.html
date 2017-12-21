@@ -2,9 +2,14 @@
 
 {% block content %}
   <h2>Login</h2>
-  <form method="post">
+  <form method="post" novalidate>
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
+    {% include 'includes/bootstrap4_form.html' with form=form %}
+    <button type="submit" class="btn btn-primary">Login</button>
   </form>
+{#  <form method="post">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    <button type="submit">Login</button>#}
+{#  </form>#}
 {% endblock %}

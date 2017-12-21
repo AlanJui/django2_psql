@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+    {% for hidden_field in form.hidden_fields %}
+      {{ hidden_field.errors }}
+      {{ hidden_field }}
+    {% endfor %}
+
+    <table border="1">
+      {% for form_field in form.visible_fields %}
+        <tr>
+          <th>{{ form_field.label_tag }}</th>
+          <td>
+            {{ form_field.errors }}
+{#            {% render_field form_field style="border: 2px dashed red;" placeholder=field.name %}#}
+            {{ form_field|attr:"style: border: 2px dashed red;" }}
+            {{ form_field.help_text }}
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}
+
