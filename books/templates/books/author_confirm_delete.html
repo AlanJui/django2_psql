@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Delete Confirmation</h2>
+  <form method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    {% include 'includes/snippets_detail.html' with form=form %}
+    <input type="submit" value="Confirm" class="btn btn-danger">
+  </form>
+{% endblock %}
+

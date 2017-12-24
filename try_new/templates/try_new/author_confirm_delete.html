@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Author Delete Confirmation</h2>
+  {% include 'includes/snippets_confirm_delete.html' %}
+{#  <form method="post" novalidate>#}
+{#    {% csrf_token %}#}
+{#    {% include 'includes/bootstrap4_form.html' with form=form %}#}
+{#    <button type="submit" class="btn btn-primary">Submit</button>#}
+{#  </form>#}
+{% endblock %}
+

@@ -1,0 +1,9 @@
+{% for object in object_list %}
+  <div>
+    <h2>
+      <a href="{% url '{{ detail_link }}l' object.pk %}">
+        {{ object }}
+      </a>
+    </h2>
+  </div>
+{% endfor %}

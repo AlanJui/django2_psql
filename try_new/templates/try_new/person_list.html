@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>List Person</h2>
+  {% for object in object_list %}
+    <ul>
+      <li>
+        <a href="{% url 'person-detail' object.pk %}">
+          {{ object }}
+        </a>
+      </li>
+    </ul>
+  {% empty %}
+    <p>No record!!</p>
+  {% endfor %}
+{% endblock %}

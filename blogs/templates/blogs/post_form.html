@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Add Post</h2>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% include 'includes/snippets_form.html' with form=form %}
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+{% endblock %}
+

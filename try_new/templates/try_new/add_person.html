@@ -7,7 +7,29 @@
   <form method="post" novalidate>
     {% csrf_token %}
 
-    {% include 'includes/bootstrap4_form.html' with form=form %}
+{#    {% include 'includes/bootstrap4_form.html' with form=form %}#}
+
+{#    {% for field in form %}#}
+{#        <div class="fieldWrapper">#}
+{#            {{ field.errors }}#}
+{#            {{ field.label_tag }} {{ field }}#}
+{#            {% if field.help_text %}#}
+{#            <p class="help">{{ field.help_text|safe }}</p>#}
+{#            {% endif %}#}
+{#        </div>#}
+{#    {% endfor %}#}
+
+    {# Include the hidden fields #}
+{#    {% for hidden in form.hidden_fields %}#}
+{#      {{ hidden }}#}
+{#    {% endfor %}#}
+    {# Include the visible fields #}
+{#    {% for field in form.visible_fields %}#}
+{#        <div class="fieldWrapper">#}
+{#            {{ field.errors }}#}
+{#            {{ field.label_tag }} {{ field }}#}
+{#        </div>#}
+{#    {% endfor %}#}
 
     <div class="form-group">
       <button type="submit" class="btn btn-success">

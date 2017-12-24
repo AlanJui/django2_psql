@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ form_title }}</h2>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% include 'includes/snippets_detail.html' with form=form %}
+    <a href="{% url 'author-update' object.pk %}" class="btn btn-success">Edit</a>
+    <a href="{% url 'author-delete' object.pk %}" class="btn btn-danger">Delete</a>
+  </form>
+{% endblock %}

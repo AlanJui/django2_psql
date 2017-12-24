@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Author List</h2>
+  {% for author in author_list %}
+    <div class="post-entry">
+      <h2><a href="{% url 'author-detail' author.pk %}">{{ author.title }}</a></h2>
+      <p>{{ author.first_name }}</p>
+      <p>{{ author.last_name }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
