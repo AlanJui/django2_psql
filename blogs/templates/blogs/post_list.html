@@ -1,16 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>List Post</h2>
-  {% for object in object_list %}
-    <ul>
-      <li>
-        <a href="{% url 'post-detail' object.pk %}">
-          {{ object }}
-        </a>
-      </li>
-    </ul>
-  {% empty %}
-    <p>No record!!</p>
-  {% endfor %}
+  <div class="row">
+    <div class="col-sm-8 blog-main">
+      {% for post in post_list %}
+        <div class="blog-post">
+          <h2 class="blog-post-title">
+            <a href="{% url 'post-detail' post.pk %}">
+              {{ post.title }}
+            </a>
+          </h2>
+          <p class="blog-post-meta">
+            {{ post.author }}
+          </p>
+          <p>
+            {{ post.text }}
+          </p>
+        </div>
+      {% empty %}
+        <p>尚無任何貼文！</p>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}

@@ -2,62 +2,112 @@
 {% load staticfiles %}
 <html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Django Blog</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
 
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400">
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
-          crossorigin="anonymous">
-{#    <link rel="stylesheet"#}
-{#          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"#}
-{#          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"#}
-{#          crossorigin="anonymous">#}
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
   </head>
 
   <body>
-    <header>
-      <div class="nav-left">
-        <h1>
-          <a href="/">Django Blog</a>
-        </h1>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+      <a class="navbar-brand" href="#">CMS App</a>
+      <button class="navbar-toggler d-lg-none"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarsExampleDefault"
+              aria-controls="navbarsExampleDefault"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">首頁 <span class="sr-only">(current)</span></a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'post-create' %}">撰寫筆記</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">系統設定</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">個人檔案</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">操作指南</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">登出系統</a>
+            </li>
+          {% else %}
+            <li class="nav-item float-right">
+              <a class="nav-link" href="{% url 'login' %}">登入系統</a>
+            </li>
+            <li class="nav-item float-right">
+              <a class="nav-link" href="{% url 'register' %}">註冊登記</a>
+            </li>
+          {% endif %}
+        </ul>
+        {% if user.is_authenticated %}
+          <span class="navbar-text">
+            歡迎： {{ user.username }} ！
+          </span>
+        {% endif %}
+
       </div>
-      <div class="nav-right">
-        <a href="{% url 'post-create' %}">+ New Blog Post</a>
+    </nav>
+
+    <header>
+      <div class="blog-header">
+        <div class="container">
+          <h1 class="blog-title">阿中的網路筆記本</h1>
+          <p class="lead blog-description">記錄學習經過與分享體悟心得</p>
+        </div>
       </div>
     </header>
 
-    <main>
-      <div class="container">
-        {% if user.is_authenticated %}
-          <p>Hi {{ user.username }}!</p>
-          <p><a href="{% url 'logout' %}">Logout</a></p>
-        {% else %}
-          <p>You are not logged in.</p>
-          <a href="{% url 'login' %}">Login</a>
-        {% endif %}
-
-        {% block content %}
-        {% endblock content %}
-      </div>
+    <main role="main" class="container">
+{#      <div class="row">#}
+{#        <form class="form-inline">#}
+{#          <input class="form-control mr-sm-2" type="text" placeholder="關鍵字..." aria-label="Search">#}
+{#          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜尋</button>#}
+{#        </form>#}
+{#      </div>#}
+      {% block content %}
+      {% endblock content %}
     </main>
 
-    <footer>
-      <div class="container">
-        <hr>
-        <a href="http://simpleisbetterthancomplex.com"
-           title="Simple is Better Than Complex">SimpleIsBetterThanComplex.com</a>
-        <a href="https://github.com/simpleisbetterthancomplex/simple-django-widget-tweaks"
-           title="Simple Django Widget Tweaks Repository">github</a>
-      </div>
+    <footer id="footer">
+      <p>&copy; CCC Studio 2017</p>
     </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
   </body>
 </html>
